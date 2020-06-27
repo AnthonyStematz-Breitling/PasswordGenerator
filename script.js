@@ -5,63 +5,84 @@ var uppercase =["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P",
 var num =["0","1","2","3","4","5","6","7","8","9"];
 var special =["!","@","#","$","%","^","&","*","?","+",".","'",";",":","|","`","~","+","=","_","-","<",">","[","]","{","}","(",")"];
 // Write password to the #password input
+var password = "";
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-  password=[lowerChoice, numberChoice, specialChoice, upperChoice]
-
 }
 function generatePassword() {
-      var divide=0;
+      var ofConfirms=0;
       var length=parseInt(prompt("How many characters do you want the password to have?"));
       console.log(length);
       if(length >128 || length <8){
-        alert("Password must contain no less that 8 characters and no more than 128 characters")
-        return
+        alert("Password must contain no less that 8 characters and no more than 128 characters");
+        return;
       }
       var answerLower=confirm("Do you want lowercase letters in the password?");
       if(answerLower ===true){
-        divide++
+        ofConfirms++;
       }
       var answerUpper=confirm("Do you want uppercase letters in the password?");
       if(answerUpper===true){
-        divide++
+        ofConfirms++;
       }
       var answerNumber=confirm("Do you want numbers in the password?");
       if(answerNumber===true){
-        divide++
+        ofConfirms++;
       }
       var answerSpecial=confirm("Do you want special characters in the password?");
       if(answerSpecial===true){
-        divide++
-      }
-      for ( var i=0; i<(length/divide); i++){
-        console.log(i)
-      if(answerLower === true){
-        var lowerChoice = lowercase[Math.floor(Math.random() * lowercase.length)];
-        console.log(lowerChoice);
-      }
-      if(answerUpper === true){
-        var upperChoice = uppercase[Math.floor(Math.random() * uppercase.length)];
-        console.log(upperChoice);
-      }
-      if(answerNumber === true){
-        var numberChoice = num[Math.floor(Math.random() * num.length)];
-        console.log(numberChoice);
-      }
-      if(answerSpecial === true){
-        var specialChoice = special[Math.floor(Math.random() * special.length)];
-        console.log(specialChoice);
+        ofConfirms++;
       }
       if(answerLower === false &&
         answerUpper === false &&
         answerNumber === false &&
         answerSpecial === false) {
         alert("Must Contain a character");
+        return
+        }
+      for ( var i=0; i<(length/ofConfirms); i++){
+        console.log(i);
+      if(answerLower === true){
+        var lowerChoice = lowercase[Math.floor(Math.random() * lowercase.length)];
+        console.log(lowerChoice);
       }
+      else{
+        lowerChoice ="" ;
       }
+      if(answerUpper === true){
+        var upperChoice = uppercase[Math.floor(Math.random() * uppercase.length)];
+        console.log(upperChoice);
       }
-  // Add event listener to generate button
+      else{
+        upperChoice ="" ;
+      }
+      if(answerNumber === true){
+        var numberChoice = num[Math.floor(Math.random() * num.length)];
+        console.log(numberChoice);
+      }
+      else{
+        numberChoice="" ;
+      }
+      if(answerSpecial === true){
+        var specialChoice = special[Math.floor(Math.random() * special.length)];
+        console.log(specialChoice);
+      }
+      else{
+        specialChoice ="" ;
+      }
+        password = password.concat(lowerChoice, upperChoice,numberChoice,specialChoice);
+        //wierd maybe
+       // password.splice((Math.floor(Math.random)*password.length -1), 0, lowerChoice);
+       // password.splice((Math.floor(Math.random)*password.length -1), 0, upperChoice);
+        //password.splice((Math.floor(Math.random)*password.length -1), 0, numberChoice);
+        //password.splice((Math.floor(Math.random)*password.length -1), 0, specialChoice);
+        console.log(password)
+      }
+      password = password.substr(0,length);
+      return password
+      } 
+// Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
