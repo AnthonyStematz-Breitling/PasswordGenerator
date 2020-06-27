@@ -73,15 +73,16 @@ function generatePassword() {
       else{
         specialChoice ="" ;
       }
-        password = password.concat(lowerChoice, upperChoice,numberChoice,specialChoice);
-        //wierd maybe
-       // password.splice((Math.floor(Math.random)*password.length -1), 0, lowerChoice);
-       // password.splice((Math.floor(Math.random)*password.length -1), 0, upperChoice);
-        //password.splice((Math.floor(Math.random)*password.length -1), 0, numberChoice);
-        //password.splice((Math.floor(Math.random)*password.length -1), 0, specialChoice);
+        password = password.concat(lowerChoice, upperChoice, numberChoice, specialChoice);
         console.log(password)
       }
       password = password.substr(0,length);
+      password = password.split("");
+      console.log(password);
+      password = password.sort((a,b) => 0.5 - Math.random());
+      console.log(password);
+      password = password.join("");
+      console.log(password);
       return password
       } 
 // Add event listener to generate button
